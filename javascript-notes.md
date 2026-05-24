@@ -387,6 +387,56 @@ Now, let's cover some important concepts related to functions.
 While callbacks can be useful, their disadvantages often make them less practical in complex asynchronous flows. Promises and async/await provide cleaner, more readable alternatives to manage asynchronous behavior in JavaScript applications.
 ## Function Scope in JavaScript 🕵️
 
+//what is callback hell ?
+
+Callback hell is when multiple nested callbacks make code hard to read and maintain.
+
+Example:
+
+loginUser(user, () => {
+  getProfile(() => {
+    getOrders(() => {
+      makePayment(() => {
+        console.log("Done");
+      });
+    });
+  });
+});
+
+Notice the pyramid shape.
+
+Problems:
+
+hard to read
+hard debugging
+messy error handling
+difficult maintenance
+
+This is called:
+
+callback hell
+pyramid of doom
+
+Modern solution:
+
+//Promise
+loginUser(user)
+  .then(getProfile)
+  .then(getOrders)
+  .then(makePayment)
+  .then(() => console.log("Done"));
+async/await
+async function run() {
+  await loginUser(user);
+  await getProfile();
+  await getOrders();
+  await makePayment();
+
+  console.log("Done");
+}
+
+// Much cleaner.
+
 Scope determines from where the variables are accessible.
 
 **There are three types of scope:**
