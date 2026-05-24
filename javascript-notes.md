@@ -250,6 +250,13 @@ function consoleEven(arr) {
 
 consoleEven(arr)
 And second, you can do method chaining in map but not in forEach.
+let arr = [1, 2, 3, 4, 5, 6];
+
+let data = arr
+  .map(num => num * 2)
+  .filter(num => num > 5);
+
+console.log(data);
 
 
 // Convert  the new array back to original
