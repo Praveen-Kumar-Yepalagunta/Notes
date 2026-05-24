@@ -467,6 +467,85 @@ console.log(c) // 10
 console.log(c) // Error as c is not accessible outside the block
 ```
 
+
+You mean **Inversion of Control (IoC)**.
+
+In simple terms:
+
+> Instead of your code controlling everything, something else controls when your code runs.
+
+---
+
+Normal control:
+
+```js id="0dg51x"
+function greet() {
+  console.log("Hello");
+}
+
+greet();
+```
+
+You directly call the function.
+
+---
+
+Inversion of Control:
+
+```js id="dthwpi"
+button.addEventListener("click", () => {
+  console.log("Clicked");
+});
+```
+
+Now browser controls execution.
+
+You give a callback, and browser decides when to run it.
+
+That control is “inverted”.
+
+---
+
+Another example:
+
+```js id="6a6d7j"
+setTimeout(() => {
+  console.log("Hi");
+}, 1000);
+```
+
+You are not calling the callback directly.
+JavaScript runtime calls it later.
+
+---
+
+Why callback hell is related to IoC:
+
+When using callbacks heavily:
+
+```js id="2jqw5t"
+doTask(() => {
+   anotherTask(() => {
+      anotherOne();
+   });
+});
+```
+
+You lose direct control of flow because external APIs decide when callbacks execute.
+
+---
+
+Framework example:
+
+In Angular:
+
+* you create components
+* Angular controls lifecycle
+* Angular calls methods like `ngOnInit()`
+
+That is also IoC.
+
+
 ## *this* keyword in js
 
 *this* keyword refers to the context in which a function is called.
