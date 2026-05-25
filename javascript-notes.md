@@ -939,6 +939,144 @@ const result = multiplyByTwo(5); // Returns 10
 console.log(result); // Outputs: 10
 
 ```
+Main use:
+
+> Configure part of a function now,
+> use remaining values later.
+
+---
+
+Without currying:
+
+```js id="7qj0d8"
+function multiply(a, b) {
+   return a * b;
+}
+
+multiply(2, 5);
+multiply(2, 10);
+multiply(2, 20);
+```
+
+You keep repeating `2`.
+
+---
+
+With currying:
+
+```js id="11g9aq"
+function multiply(a) {
+   return function(b) {
+      return a * b;
+   };
+}
+
+const multiplyBy2 = multiply(2);
+
+multiplyBy2(5);
+multiplyBy2(10);
+multiplyBy2(20);
+```
+
+Now `2` is stored once.
+
+---
+
+# Why useful?
+
+Because you can create specialized reusable functions.
+
+Example:
+
+```js id="cfh5ko"
+const add10 = add(10);
+const add100 = add(100);
+```
+
+Now:
+
+* `add10(5)` → 15
+* `add100(5)` → 105
+
+---
+
+# When used
+
+## 1. Reusing same configuration
+
+```js id="ib7v8k"
+const applyTax18 = tax(18);
+```
+
+Later:
+
+```js id="z0vc95"
+applyTax18(1000);
+applyTax18(5000);
+```
+
+---
+
+## 2. Avoid repeating arguments
+
+Instead of:
+
+```js id="ahkp0v"
+sendEmail("admin");
+sendEmail("admin");
+sendEmail("admin");
+```
+
+You configure once.
+
+---
+
+## 3. Function factories
+
+Function creates customized functions.
+
+```js id="gqlz6j"
+const greaterThan10 = greaterThan(10);
+```
+
+Now:
+
+```js id="f8u6qs"
+greaterThan10(15); // true
+greaterThan10(5);  // false
+```
+
+---
+
+# Real-life analogy
+
+```txt id="8pqjef"
+Ordering pizza:
+
+Step 1:
+Choose size → large
+
+Step 2 later:
+Choose topping → cheese
+```
+
+Instead of giving everything together.
+
+---
+
+# Important
+
+Most developers do NOT write currying daily.
+
+But:
+
+* closures
+* functions returning functions
+* reusable configured functions
+
+are very common in JavaScript.
+
+================================================
 **Data Hiding/Encapsulation**
 
 * Data hiding is achieved by keeping certain variables private within the scope of an outer function.
