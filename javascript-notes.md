@@ -746,6 +746,127 @@ mySet.add(6);
 
 **deep copy:**  It creates a new object where all properties and nested objects are duplicated, not just their references. Changes made to the copied object (or any of its nested objects) will not affect the original object, and vice versa.
 
+## Shallow Copy
+
+Copies only the first level.
+Nested objects/arrays still share the same memory reference.
+
+```js
+const obj1 = {
+  name: "Praveen",
+  address: {
+    city: "Bangalore"
+  }
+};
+
+const obj2 = { ...obj1 };
+
+obj2.name = "Kumar"; // separate
+obj2.address.city = "Hyderabad"; // affects obj1 too
+
+console.log(obj1.address.city); // Hyderabad
+```
+
+### Memory
+
+```txt
+obj1.address  ─┐
+               ├── same object in memory
+obj2.address  ─┘
+```
+
+---
+
+## Deep Copy
+
+Copies everything including nested objects.
+No shared references.
+
+```js
+const obj1 = {
+  name: "Praveen",
+  address: {
+    city: "Bangalore"
+  }
+};
+
+const obj2 = structuredClone(obj1);
+
+obj2.address.city = "Hyderabad";
+
+console.log(obj1.address.city); // Bangalore
+```
+
+### Memory
+
+```txt
+obj1.address  ---> separate object
+obj2.address  ---> separate object
+```
+
+---
+
+# Main Difference
+
+| Feature                          | Shallow Copy | Deep Copy |
+| -------------------------------- | ------------ | --------- |
+| First level copied               | Yes          | Yes       |
+| Nested objects copied separately | No           | Yes       |
+| Shares references                | Yes          | No        |
+| Faster                           | Yes          | No        |
+| Safer for nested data            | No           | Yes       |
+
+---
+
+# Common Ways
+
+## Shallow Copy
+
+```js
+Object.assign({}, obj)
+
+{ ...obj }
+
+array.slice()
+```
+
+## Deep Copy
+
+```js
+structuredClone(obj)
+```
+
+Old method:
+
+```js
+JSON.parse(JSON.stringify(obj))
+```
+
+But it fails for:
+
+* functions
+* Date
+* Map
+* Set
+* undefined
+
+---
+
+# Simple Real Life Example
+
+## Shallow Copy
+
+Photocopy of a house key:
+
+* outside copy new
+* but both keys open same house
+
+## Deep Copy
+
+Building a completely new house:
+
+* everything independent
+
 
 ## Closures in JavaScript (❗important) 🔒
 We have already used a closure without even realizing it. In the example below, prefix is a closed-over-variable.
