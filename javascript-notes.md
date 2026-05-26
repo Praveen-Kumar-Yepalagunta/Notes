@@ -1377,6 +1377,394 @@ consoleNum() // undefined
 
 // If instead of var -> let, it will give an error as let values are not initialized
 ```
+HOISTING EXPLAINATION
+======================
+
+# Hoisting in JavaScript
+
+## Simple Definition
+
+```text id="gchb9h"
+Hoisting means JavaScript knows about variables and functions before the code executes.
+```
+
+Before running code, JS:
+
+* scans declarations
+* allocates memory
+
+---
+
+# 2 Phases in JavaScript
+
+| Phase           | What Happens                         |
+| --------------- | ------------------------------------ |
+| Memory Creation | Variables/functions stored in memory |
+| Execution       | Code runs line by line               |
+
+---
+
+# `var` Hoisting
+
+```js id="g4kl0p"
+console.log(a);
+
+var a = 10;
+```
+
+Output:
+
+```text id="c5jst2"
+undefined
+```
+
+Why?
+
+```js id="lwm96l"
+var a;
+console.log(a);
+a = 10;
+```
+
+* declaration hoisted
+* value assignment stays in same place
+
+---
+
+# `let` Hoisting
+
+```js id="r8k14f"
+console.log(b);
+
+let b = 20;
+```
+
+Output:
+
+```text id="w9y2a2"
+ReferenceError
+```
+
+Why?
+
+* `let` is hoisted
+* but cannot access before initialization
+
+This area is called:
+
+```text id="o6d54t"
+Temporal Dead Zone (TDZ)
+```
+
+---
+
+# `const` Hoisting
+
+```js id="h2jw1v"
+console.log(c);
+
+const c = 30;
+```
+
+Output:
+
+```text id="3c1kn4"
+ReferenceError
+```
+
+Same as `let`.
+
+---
+
+# Function Hoisting
+
+## Function Declaration
+
+```js id="7rj6l6"
+greet();
+
+function greet() {
+  console.log("Hello");
+}
+```
+
+Output:
+
+```text id="e02hn7"
+Hello
+```
+
+Why?
+
+* full function stored in memory
+
+---
+
+# Function Expression
+
+```js id="6skmh7"
+sayHi();
+
+var sayHi = function() {
+  console.log("Hi");
+};
+```
+
+Output:
+
+```text id="sr6y5n"
+TypeError
+```
+
+Why?
+
+```js id="zj20eq"
+var sayHi = undefined;
+```
+
+Then:
+
+```js id="dhqck3"
+undefined();
+```
+
+---
+
+# Most Important Difference
+
+| Keyword              | Hoisted? | Initial Value |
+| -------------------- | -------- | ------------- |
+| `var`                | Yes      | `undefined`   |
+| `let`                | Yes      | uninitialized |
+| `const`              | Yes      | uninitialized |
+| function declaration | Yes      | full function |
+
+---
+
+# Most Asked Interview Questions
+
+| Question                         | Answer                       |
+| -------------------------------- | ---------------------------- |
+| Is JS physically moving code?    | No                           |
+| What gets hoisted?               | Declarations                 |
+| Are `let` and `const` hoisted?   | Yes                          |
+| Why error with `let`?            | TDZ                          |
+| Why `undefined` with `var`?      | Initialized with `undefined` |
+| Which function is fully hoisted? | Function declaration         |
+
+---
+
+# Easy Memory Trick
+
+```text id="jlwm71"
+var    → undefined
+let    → TDZ
+const  → TDZ
+function → full function
+```
+
+---
+
+# One-Line Interview Answer
+
+```text id="omv5l7"
+Hoisting is JavaScript's behavior of allocating memory for declarations before code execution.
+```
+=====================
+
+WHAT IS TDZ (TEMPORAL DEAD ZONE)
+# Hoisting in JavaScript
+
+## Simple Definition
+
+```text id="gchb9h"
+Hoisting means JavaScript knows about variables and functions before the code executes.
+```
+
+Before running code, JS:
+
+* scans declarations
+* allocates memory
+
+---
+
+# 2 Phases in JavaScript
+
+| Phase           | What Happens                         |
+| --------------- | ------------------------------------ |
+| Memory Creation | Variables/functions stored in memory |
+| Execution       | Code runs line by line               |
+
+---
+
+# `var` Hoisting
+
+```js id="g4kl0p"
+console.log(a);
+
+var a = 10;
+```
+
+Output:
+
+```text id="c5jst2"
+undefined
+```
+
+Why?
+
+```js id="lwm96l"
+var a;
+console.log(a);
+a = 10;
+```
+
+* declaration hoisted
+* value assignment stays in same place
+
+---
+
+# `let` Hoisting
+
+```js id="r8k14f"
+console.log(b);
+
+let b = 20;
+```
+
+Output:
+
+```text id="w9y2a2"
+ReferenceError
+```
+
+Why?
+
+* `let` is hoisted
+* but cannot access before initialization
+
+This area is called:
+
+```text id="o6d54t"
+Temporal Dead Zone (TDZ)
+```
+
+---
+
+# `const` Hoisting
+
+```js id="h2jw1v"
+console.log(c);
+
+const c = 30;
+```
+
+Output:
+
+```text id="3c1kn4"
+ReferenceError
+```
+
+Same as `let`.
+
+---
+
+# Function Hoisting
+
+## Function Declaration
+
+```js id="7rj6l6"
+greet();
+
+function greet() {
+  console.log("Hello");
+}
+```
+
+Output:
+
+```text id="e02hn7"
+Hello
+```
+
+Why?
+
+* full function stored in memory
+
+---
+
+# Function Expression
+
+```js id="6skmh7"
+sayHi();
+
+var sayHi = function() {
+  console.log("Hi");
+};
+```
+
+Output:
+
+```text id="sr6y5n"
+TypeError
+```
+
+Why?
+
+```js id="zj20eq"
+var sayHi = undefined;
+```
+
+Then:
+
+```js id="dhqck3"
+undefined();
+```
+
+---
+
+# Most Important Difference
+
+| Keyword              | Hoisted? | Initial Value |
+| -------------------- | -------- | ------------- |
+| `var`                | Yes      | `undefined`   |
+| `let`                | Yes      | uninitialized |
+| `const`              | Yes      | uninitialized |
+| function declaration | Yes      | full function |
+
+---
+
+# Most Asked Interview Questions
+
+| Question                         | Answer                       |
+| -------------------------------- | ---------------------------- |
+| Is JS physically moving code?    | No                           |
+| What gets hoisted?               | Declarations                 |
+| Are `let` and `const` hoisted?   | Yes                          |
+| Why error with `let`?            | TDZ                          |
+| Why `undefined` with `var`?      | Initialized with `undefined` |
+| Which function is fully hoisted? | Function declaration         |
+
+---
+
+# Easy Memory Trick
+
+```text id="jlwm71"
+var    → undefined
+let    → TDZ
+const  → TDZ
+function → full function
+```
+
+---
+
+# One-Line Interview Answer
+
+```text id="omv5l7"
+Hoisting is JavaScript's behavior of allocating memory for declarations before code execution.
+```
+===========================
+
 ## Objects in JavaScript 🔮
 Just like arrays, objects are a way of storing data. We do so with the help of key-value pairs.
 
