@@ -13,7 +13,147 @@ Let's start off with some basic concepts every JS developer needs to know.
 2) Validating HTML page
 3) Converting the frontend object into JSON?XML
 4) Rendering server response to HTML
+===========================
 
+# JavaScript Data Types
+
+## 1. Primitive Data Types
+
+* Immutable
+* Stored by value
+* Simple values
+
+| Type      | Description                              | Example                 |
+| --------- | ---------------------------------------- | ----------------------- |
+| Number    | Stores numbers                           | `let age = 25`          |
+| String    | Stores text                              | `let name = "Praveen"`  |
+| Boolean   | `true` or `false`                        | `let isLogin = true`    |
+| Undefined | Variable declared but value not assigned | `let x;`                |
+| Null      | Intentional empty value                  | `let data = null`       |
+| BigInt    | Very large integers                      | `let big = 123456789n`  |
+| Symbol    | Unique identifier                        | `let id = Symbol("id")` |
+
+---
+
+# 2. Non-Primitive Data Types
+
+* Mutable
+* Stored by reference
+* Complex data
+
+| Type     | Description            | Example                       |
+| -------- | ---------------------- | ----------------------------- |
+| Object   | Key-value collection   | `let user = {name:"Praveen"}` |
+| Array    | Collection of values   | `let arr = [1,2,3]`           |
+| Function | Reusable block of code | `function greet(){}`          |
+| Date     | Date and time          | `new Date()`                  |
+| Map      | Key-value pairs        | `new Map()`                   |
+| Set      | Unique values only     | `new Set()`                   |
+
+---
+
+# Important Interview Questions
+
+| Question                                  | Answer                                                        |
+| ----------------------------------------- | ------------------------------------------------------------- |
+| `typeof null`                             | `"object"`                                                    |
+| `typeof []`                               | `"object"`                                                    |
+| `typeof function(){}`                     | `"function"`                                                  |
+| Array is primitive?                       | No                                                            |
+| Primitive stored by?                      | Value                                                         |
+| Objects stored by?                        | Reference                                                     |
+| Primitive mutable?                        | No                                                            |
+| Objects mutable?                          | Yes                                                           |
+| Difference between `null` and `undefined` | `undefined` = no value assigned, `null` = intentionally empty |
+
+---
+
+# Easy Memory Trick
+
+## Primitive Types
+
+```text id="wq4a4c"
+Number
+String
+Boolean
+Undefined
+Null
+BigInt
+Symbol
+```
+
+## Everything else
+
+```text id="5vsl4j"
+Object
+```
+
+
+==================
+
+# Why Do We Need Different Data Types in JavaScript?
+
+Different data types exist because different kinds of data behave differently.
+
+| Data Type | Why Needed                           | Example            |
+| --------- | ------------------------------------ | ------------------ |
+| Number    | For calculations                     | `10 + 20`          |
+| String    | For text handling                    | `"Hello"`          |
+| Boolean   | For decision making                  | `true/false`       |
+| Undefined | To represent missing value           | `let x;`           |
+| Null      | To intentionally clear data          | `user = null`      |
+| BigInt    | For huge numbers beyond Number limit | Banking, IDs       |
+| Symbol    | To create unique keys                | Object uniqueness  |
+| Object    | To store related grouped data        | User details       |
+| Array     | To store multiple values             | Product list       |
+| Function  | To reuse logic                       | `calculateTotal()` |
+
+---
+
+# Real-World Analogy
+
+Imagine an online shopping app:
+
+| Requirement                | Data Type |
+| -------------------------- | --------- |
+| Product price              | Number    |
+| Product name               | String    |
+| In stock?                  | Boolean   |
+| No delivery address yet    | Undefined |
+| User removed profile photo | Null      |
+| Millions of products       | Array     |
+| Customer object            | Object    |
+| Place order logic          | Function  |
+
+---
+
+# Core Reason
+
+Without data types:
+
+* JavaScript wouldn’t know:
+
+  * how to store data
+  * how much memory needed
+  * what operations are allowed
+
+Example:
+
+```js id="5emqqd"
+"10" + 5   // "105"
+
+10 + 5     // 15
+```
+
+String and Number behave differently.
+
+---
+
+# Simple One-Line Answer for Interview
+
+```text id="ow87mn"
+Data types are needed to store, organize, and process different kinds of data correctly and efficiently.
+```
 
 ====================
 
