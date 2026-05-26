@@ -16,6 +16,7 @@ Let's start off with some basic concepts every JS developer needs to know.
 
 
 ====================
+
 whats the difference between the declation and defination in javascript ?
 In JavaScript:
 
