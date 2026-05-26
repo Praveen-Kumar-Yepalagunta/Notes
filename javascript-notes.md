@@ -1573,196 +1573,195 @@ Hoisting is JavaScript's behavior of allocating memory for declarations before c
 =====================
 
 WHAT IS TDZ (TEMPORAL DEAD ZONE)
-# Hoisting in JavaScript
 
-## Simple Definition
+ **TDZ = Temporal Dead Zone** in JavaScript.
 
-```text id="gchb9h"
-Hoisting means JavaScript knows about variables and functions before the code executes.
-```
+It is the time between:
 
-Before running code, JS:
+1. Variable is **hoisted**
+2. And before it is **initialized**
 
-* scans declarations
-* allocates memory
+During this period, accessing the variable gives an error.
 
 ---
 
-# 2 Phases in JavaScript
+## Example
 
-| Phase           | What Happens                         |
-| --------------- | ------------------------------------ |
-| Memory Creation | Variables/functions stored in memory |
-| Execution       | Code runs line by line               |
+```js
+console.log(a); // ❌ ReferenceError
 
----
-
-# `var` Hoisting
-
-```js id="g4kl0p"
-console.log(a);
-
-var a = 10;
-```
-
-Output:
-
-```text id="c5jst2"
-undefined
+let a = 10;
 ```
 
 Why?
 
-```js id="lwm96l"
-var a;
-console.log(a);
-a = 10;
-```
-
-* declaration hoisted
-* value assignment stays in same place
+* `a` is hoisted
+* But `let` variables are not initialized immediately
+* Until `let a = 10`, variable stays inside TDZ
 
 ---
 
-# `let` Hoisting
+# TDZ applies to
 
-```js id="r8k14f"
-console.log(b);
+* `let`
+* `const`
 
-let b = 20;
-```
+NOT to:
 
-Output:
-
-```text id="w9y2a2"
-ReferenceError
-```
-
-Why?
-
-* `let` is hoisted
-* but cannot access before initialization
-
-This area is called:
-
-```text id="o6d54t"
-Temporal Dead Zone (TDZ)
-```
+* `var`
 
 ---
 
-# `const` Hoisting
+# Compare with var
 
-```js id="h2jw1v"
-console.log(c);
+## var
 
-const c = 30;
+```js
+console.log(x); // undefined
+
+var x = 5;
 ```
 
-Output:
+`var` gets:
 
-```text id="3c1kn4"
-ReferenceError
-```
+* hoisted
+* initialized with `undefined`
 
-Same as `let`.
+So no error.
 
 ---
 
-# Function Hoisting
+## let / const
 
-## Function Declaration
+```js
+console.log(y); // ❌ ReferenceError
 
-```js id="7rj6l6"
-greet();
+let y = 5;
+```
 
-function greet() {
-  console.log("Hello");
+Hoisted ✅
+Initialized later ❌
+
+So TDZ exists.
+
+---
+
+# Visual Timeline
+
+```js
+{
+   // TDZ starts
+
+   let a;
+
+   // TDZ ends
 }
 ```
 
-Output:
+More accurately:
 
-```text id="e02hn7"
-Hello
+```js
+{
+   // a exists internally
+   // but cannot be accessed yet
+
+   let a = 10;
+
+   // now usable
+}
+```
+
+---
+
+# const also has TDZ
+
+```js
+console.log(z); // ❌ ReferenceError
+
+const z = 100;
+```
+
+---
+
+# Important Interview Point
+
+## Hoisting still happens for let/const
+
+Many think let/const are not hoisted.
+
+Wrong.
+
+They ARE hoisted, but placed in TDZ.
+
+---
+
+# Why TDZ exists?
+
+To prevent using variables before declaration.
+
+This avoids bugs like:
+
+```js
+total = total + 1;
+```
+
+before initialization.
+
+---
+
+# Most Common Interview Question
+
+## Q: Difference between `var` hoisting and `let` hoisting?
+
+| var                           | let / const                      |
+| ----------------------------- | -------------------------------- |
+| Hoisted                       | Hoisted                          |
+| Initialized as `undefined`    | Not initialized                  |
+| Can access before declaration | Cannot access before declaration |
+| No TDZ                        | TDZ exists                       |
+
+---
+
+# One More Example
+
+```js
+let a = 1;
+
+function test() {
+    console.log(a); // ❌ TDZ error
+
+    let a = 2;
+}
+
+test();
 ```
 
 Why?
 
-* full function stored in memory
+Inside function:
 
----
-
-# Function Expression
-
-```js id="6skmh7"
-sayHi();
-
-var sayHi = function() {
-  console.log("Hi");
-};
+```js
+let a
 ```
 
-Output:
+creates a new local variable.
 
-```text id="sr6y5n"
-TypeError
-```
+Before initialization, local `a` is in TDZ.
 
-Why?
-
-```js id="zj20eq"
-var sayHi = undefined;
-```
-
-Then:
-
-```js id="dhqck3"
-undefined();
-```
-
----
-
-# Most Important Difference
-
-| Keyword              | Hoisted? | Initial Value |
-| -------------------- | -------- | ------------- |
-| `var`                | Yes      | `undefined`   |
-| `let`                | Yes      | uninitialized |
-| `const`              | Yes      | uninitialized |
-| function declaration | Yes      | full function |
-
----
-
-# Most Asked Interview Questions
-
-| Question                         | Answer                       |
-| -------------------------------- | ---------------------------- |
-| Is JS physically moving code?    | No                           |
-| What gets hoisted?               | Declarations                 |
-| Are `let` and `const` hoisted?   | Yes                          |
-| Why error with `let`?            | TDZ                          |
-| Why `undefined` with `var`?      | Initialized with `undefined` |
-| Which function is fully hoisted? | Function declaration         |
+So JS does NOT use outer `a`.
 
 ---
 
 # Easy Memory Trick
 
-```text id="jlwm71"
-var    → undefined
-let    → TDZ
-const  → TDZ
-function → full function
-```
+## `var`
 
----
+> Hoisted + initialized = `undefined`
 
-# One-Line Interview Answer
+## `let/const`
 
-```text id="omv5l7"
-Hoisting is JavaScript's behavior of allocating memory for declarations before code execution.
-```
+> Hoisted + uninitialized = TDZ error
+
 ===========================
 
 ## Objects in JavaScript 🔮
