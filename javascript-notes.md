@@ -2267,9 +2267,46 @@ let data = localStorage.getItem('key')
 localStorage.removeItem('key')
 // Same for sessionStorage
 ```
-## ** Enum
+## ** Enum (only in typescript)
 In TypeScript, an enum (short for "enumeration") is a feature that allows you to define a set of named constants
 This is useful when you want to represent a collection of related values, like states, options, or flags, with meaningful names rather than using raw numbers or strings directly in your code 
+
+```ts id="dk8d8u"
+enum Status {
+  Pending,
+  Success,
+  Failed
+}
+
+let currentStatus = Status.Success;
+
+console.log(currentStatus); // 1
+```
+
+## Simple Meaning
+
+```text id="u3mllf"
+Enum = fixed set of constant values
+```
+
+## Why Use?
+
+```text id="y4pn1w"
+To avoid hardcoded strings and mistakes
+```
+
+## Real Example
+
+```ts id="ev8b9i"
+enum Role {
+  Admin,
+  User
+}
+```
+
+=========================
+
+
 ## Namaste JavaScript
  Lexical Environment = local memory + lexical env of its parent. Hence, Lexical Environement is the local memory along with the lexical environment of its parent
  function a(){ // a is in lexical environment of global
