@@ -160,6 +160,83 @@ false == "false"; => 0 = "false"  // -> false
 !!"true"; // -> true
 ```
 
+`!` converts value to boolean and reverses it.
+
+`!!` means:
+
+* first `!` → convert to boolean and negate
+* second `!` → negate again
+
+So final result = original truthy/falsy converted to actual `true` or `false`.
+
+Example:
+
+```js
+!!"false"
+```
+
+Step-by-step:
+
+```js
+"false"      // non-empty string => truthy
+
+!"false"     // false
+
+!!"false"    // true
+```
+
+Same for:
+
+```js
+!!"true" // true
+```
+
+Because BOTH are non-empty strings.
+
+Important:
+
+```js
+"false"
+```
+
+is NOT boolean `false`.
+
+It is just text.
+
+So:
+
+```js
+!!"false" === !!"true"
+```
+
+becomes:
+
+```js
+true === true
+```
+
+Result:
+
+```js
+true
+```
+
+Falsy values in JavaScript:
+
+```js
+false
+0
+-0
+0n
+""
+null
+undefined
+NaN
+```
+
+Everything else is truthy.
+
+
 - [**7.2.15** Abstract Equality Comparison](https://262.ecma-international.org/11.0/index.html#sec-abstract-equality-comparison)
 
 ## baNaNa
