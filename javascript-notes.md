@@ -2304,6 +2304,14 @@ enum Role {
 }
 ```
 
+enum Status {
+  Pending = 10,
+  Success = 20,
+  Failed = 30
+}
+
+console.log(Status.Success); // 20
+
 =========================
 
 
